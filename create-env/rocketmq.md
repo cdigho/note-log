@@ -19,6 +19,10 @@ git checkout -b yho-release-4.7.1 origin/yho-release-4.7.1
 mvn -Prelease-all -DskipTests clean install -U
 cp -r distribution/target/rocketmq-4.7.1 /data/work/
 cd /data/work/rocketmq-4.7.1/bin
+
+git clone https://gitee.com/wlyxtx/rocketmq-console.git
+mvn clean package -Dmaven.test.skip=true
+cp target/rocketmq-console-ng-1.0.0.jar /data/work/rocketmq-4.7.1/lib
 ```
 
 
