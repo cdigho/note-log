@@ -10,3 +10,4 @@
 
 [rocketmq](create-env/rocketmq.md)
 
+[seata](create-env/seata.md)
