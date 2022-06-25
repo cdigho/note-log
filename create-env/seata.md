@@ -21,7 +21,7 @@ curl -O https://github.com/seata/seata/releases/download/v1.4.2/seata-server-1.4
 curl -O https://github.com/seata/seata/blob/develop/script/server/db/mysql.sql
 ```
 
-[sql](create-env/seata.sql)
+[sql](seata.sql)
 
 # 4.修改conf/file.conf
 
