@@ -7,6 +7,12 @@
 通过修改conf/broker.conf的messageDelayLevel的配置实现自定义参数消息延迟级别
 #messageDelayLevel自定义参数消息延迟级别
 messageDelayLevel=1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 7s
+
+实现自定义参数消息延迟级别原理
+1.broker.conf 实际对应一个配置类BrokerConfig在该配置类中增加属性messageDelayLevel可由broker.conf配置后读取到该配置类
+2.在运行期BrokerStartup中加载配置类将值重写原有的MessageStoreConfig的messageDelayLevel消息延迟级别配置值
+
+具体可查看提交记录 https://gitee.com/wlyxtx/rocketmq/commit/d6ba63d6b75ea3da1157bbf67a1665a6169bbc4a
 ```
 
 
