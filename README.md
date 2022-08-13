@@ -24,26 +24,4 @@
 
 ## 部署
 
-根目录编写index.html
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/vue.css" />
-</head>
-<body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      //...
-    }
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-</body>
-</html>
-```
-
+根目录编写 index.html
