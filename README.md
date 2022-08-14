@@ -22,11 +22,11 @@
 
 ### 微信小程序登录
 
-[详情](https://app.diagrams.net/?mode=github#Hcode-yho%2Fdraw.io%2Fmaster%2Fweixin-login%2F%E5%BE%AE%E4%BF%A1%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95.drawio)
+[详情](https://app.diagrams.net/?mode=github#Hcode-yho%2Fdraw.io%2Fmaster%2Ftechnical-scheme%2Fweixin-login%2F%E5%BE%AE%E4%BF%A1%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95.drawio)
 
 ### 微信网页应用扫码登录
 
-[详情](https://app.diagrams.net/?mode=github#Hcode-yho%2Fdraw.io%2Fmaster%2Fweixin-login%2F%E7%BD%91%E9%A1%B5%E5%BA%94%E7%94%A8%E5%BE%AE%E4%BF%A1%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86.drawio)
+[详情](https://app.diagrams.net/?mode=github#Hcode-yho%2Fdraw.io%2Fmaster%2Ftechnical-scheme%2Fweixin-login%2F%E7%BD%91%E9%A1%B5%E5%BA%94%E7%94%A8%E5%BE%AE%E4%BF%A1%E6%89%AB%E7%A0%81%E7%99%BB%E9%99%86.drawio)
 
 # 静态网页
 
