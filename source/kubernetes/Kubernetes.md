@@ -10,8 +10,8 @@ kubectl  logs -f --tail=1 <your-pod-name> -n <your-namespace>
 kubectl  logs  <your-pod-name> -n <your-namespace>|grep 'search-str' -B 3
 #进入pod
 kubectl exec -ti <your-pod-name> -n <your-namespace>  -- /bin/sh
-
-
+#删除pod
+kubectl delete pod podname -n namespace
 
 kubectl get pods 
 #查看Pod 的更多信息
