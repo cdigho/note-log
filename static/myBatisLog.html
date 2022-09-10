@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://swordpal.cn/devTools/myBatisLog.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="./myBatisLog_files/layui.css" media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+<link id="layuicss-laydate" rel="stylesheet" href="./myBatisLog_files/laydate.css" media="all"><link id="layuicss-layer" rel="stylesheet" href="./myBatisLog_files/layer.css" media="all"><link id="layuicss-skincodecss" rel="stylesheet" href="./myBatisLog_files/code.css" media="all"></head>
+<body>
+              
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+
+  <legend style="margin-left:2px">
+    <span class="layui-badge-dot"></span>
+  Mybatis日志转换
+</legend>
+</fieldset>
+ 
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label"><a style="font-size: 20px">日志内容</a></label>
+    <div class="layui-input-block">
+      <textarea style="height: 300px;" placeholder="在此处粘贴日志内容" id="log" name="log" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+
+<div style="margin-left: 110px;">
+
+    <button type="button" class="layui-btn layui-btn-warm" onclick="transLog()">转换并复制</button>
+  </div>
+
+<br>
+<br>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label"><a style="font-size: 20px">SQL语句</a></label>
+    <div class="layui-input-block">
+        <div style="border:red; solid 2px;" id="sql"></div>
+  </div>
+ 
+
+ 
+
+ 
+
+          
+<script src="./myBatisLog_files/layui.all.js.下载" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+
+    function transLog(){
+      
+      var textVa = document.getElementById("log").value;
+            // 获取带问号的SQL语句
+            var statementStartIndex = textVa.indexOf('Preparing: ');
+            var statementEndIndex = textVa.length - 1;
+            for (var i = statementStartIndex; i < textVa.length; i++) {
+                if (textVa[i] == "\n") {
+                    statementEndIndex = i;
+                    break;
+                }
+            }
+            var statementStr = textVa.substring(statementStartIndex + "Preparing: ".length, statementEndIndex);
+            //获取参数
+            var parametersStartIndex = textVa.indexOf('Parameters: ');
+            var parametersEndIndex = textVa.length;
+            for (var i = parametersStartIndex; i < textVa.length; i++) {
+                if (textVa[i] == "\n") {
+                    parametersEndIndex = i;
+                    break;
+                } else {
+                    // console.log(textVa[i]);
+                }
+            }
+            var parametersStr = textVa.substring(parametersStartIndex + "Parameters: ".length, parametersEndIndex);
+        
+            // 参数列表
+            var parametersStrArr = parametersStr.split(",");
+          
+            for (var i = 0; i < parametersStrArr.length; i++) {
+                tempStr = parametersStrArr[i].substring(0, parametersStrArr[i].indexOf("("));
+                // 不含"("是null
+                if(tempStr == ''){
+                    tempStr = "null";
+                }
+                // 如果数据中带括号需要判断参数类型
+                typeStr = parametersStrArr[i].substring(parametersStrArr[i].indexOf("(") + 1, parametersStrArr[i].indexOf(")"));
+                if (typeStr == "String" || typeStr == "Timestamp") {
+                    statementStr = statementStr.replace("?", "'" + tempStr.trim() + "'");
+                } else {
+                    statementStr = statementStr.replace("?", tempStr.trim());
+                }
+            }
+        
+            document.getElementById("sql").innerHTML = statementStr;
+            copyToClip(statementStr);
+    }
+
+//复制到剪贴板
+function copyToClip(content) {
+    var aux = document.createElement("input"); 
+    aux.setAttribute("value", content); 
+    document.body.appendChild(aux); 
+    aux.select();
+    document.execCommand("copy"); 
+    document.body.removeChild(aux);
+    
+    if(""!=content){
+        layer.msg("复制成功，直接粘贴即可");
+    }else{
+        layer.alert("转换失败");
+    }
+    
+    
+}
+
+</script>
+
+
+</div></body></html>

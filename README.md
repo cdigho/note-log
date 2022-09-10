@@ -14,6 +14,18 @@
 
 
 
+[Golang基础](source/golang/golang基础.md)
+
+# dailylog
+
+[日常记录](source/dailylog/dailylog.md)
+
+[help](source/dailylog/help.md)
+
+# docker
+
+[常用安装命令](source/docker/base-install.md)
+
 # [Kubernetes](source/kubernetes/Kubernetes.md)
 
 
@@ -27,6 +39,12 @@
 [seata](create-env/seata.md)
 
 [canal](create-env/canal.md)
+
+
+
+# MacOS
+
+[machelp](source/macos/machelp.md)
 
 # 技术方案
 
