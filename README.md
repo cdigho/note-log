@@ -20,7 +20,7 @@
 
 [日常记录](source/dailylog/dailylog.md)
 
-[help](source/dailylog/help.md)
+[help](source/dailylog/dailyloghelp.md)
 
 # docker
 
