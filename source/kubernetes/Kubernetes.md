@@ -12,6 +12,18 @@ kubectl  logs  <your-pod-name> -n <your-namespace>|grep 'search-str' -B 3
 kubectl exec -ti <your-pod-name> -n <your-namespace>  -- /bin/sh
 #删除pod
 kubectl delete pod podname -n namespace
+#拷贝文件
+    #pod到主机
+    kubectl cp -n namespace -c container  podName:filePath localFilePath
+    例
+    kubectl cp -n goldnurse -c work-goldnurse-open-api  work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/info.log info.log
+
+    #主机到pod
+    kubectl cp -n namespace -c container  localFilePath podName:filePath 
+    例
+    kubectl cp -n goldnurse -c work-goldnurse-open-api  a.txt work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/
+podName冒号后省略"/" 否则报错
+tar: removing leading ‘/’ from member names
 
 kubectl get pods 
 #查看Pod 的更多信息
