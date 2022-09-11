@@ -34,11 +34,11 @@
 
 # 环境搭建
 
-[rocketmq](create-env/rocketmq.md)
+[rocketmq](source/create-env/rocketmq.md)
 
-[seata](create-env/seata.md)
+[seata](source/create-env/seata.md)
 
-[canal](create-env/canal.md)
+[canal](source/create-env/canal.md)
 
 
 
