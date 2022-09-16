@@ -25,6 +25,17 @@ kubectl delete pod podname -n namespace
 podName冒号后省略"/" 否则报错
 tar: removing leading ‘/’ from member names
 
+#查看ingress配置（Nginx）
+#根据域名查询ingress name
+kubectl -n ${namespace} get ingress |grep ${domain}
+#示例：
+kubectl -n goldnurse get ingress |grep s.goldnurse.com
+
+#查看inress详细配置
+kubectl -n ${namespace} get ingress ${ingress_name} -o yaml
+#示例：
+kubectl -n goldnurse get ingress goldnurse-s -o yaml
+
 kubectl get pods 
 #查看Pod 的更多信息
 kubectl get pods -o wide 
