@@ -22,6 +22,8 @@
 
 [help](source/dailylog/dailyloghelp.md)
 
+# [mysql](source/mysql/mysql.md)
+
 # docker
 
 [常用安装命令](source/docker/base-install.md)
