@@ -10,6 +10,14 @@ kubectl  logs -f --tail=1 <your-pod-name> -n <your-namespace>
 kubectl  logs  <your-pod-name> -n <your-namespace>|grep 'search-str' -B 3
 #进入pod
 kubectl exec -ti <your-pod-name> -n <your-namespace>  -- /bin/sh
+#win搭配gitbash 此处可在用户目录编写~/.bash_profile文件
+#例如 alias prod="winpty kubectl --kubeconfig=/c/Users/wlyxt/.kube/config "
+winpty kubectl exec -ti <your-pod-name> -n <your-namespace>  -- bash
+
+#在 pod 外执行容器命令
+kubectl exec -ti <your-pod-name> -n <your-namespace>  -- ls
+kubectl exec -ti <your-pod-name> -n <your-namespace>  -- bash -c 'ls'
+
 #删除pod
 kubectl delete pod podname -n namespace
 #拷贝文件
