@@ -84,12 +84,12 @@ k8容器内连接MySQL
 	方式一 mycli Python工具
 		centos yum install pip && pip install mycli
 		ubuntu install mycli -> apt-get update && apt-get install mycli
-		mycli -h b6d02d95b2ca4af9ad6c850c47ab403fin01.internal.cn-east-3.mysql.rds.myhuaweicloud.com -u goldnurse_user  -p zBu7i8rGZlBsag
+		mycli -h host -u username  -p pwd
 
 	方式二 go-mysql-client golang工具
 	git clone https://github.com/deveho/go-mysql-client.git
 	go mod tidy && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  cmd/gomysql/main.go && mv main mysql
-		./mysql -h b6d02d95b2ca4af9ad6c850c47ab403fin01.internal.cn-east-3.mysql.rds.myhuaweicloud.com -u goldnurse_user  -p zBu7i8rGZlBsag goldnurse_platform
+		./mysql -h host -u username  -p pwd databaseName
 
 ```
 
