@@ -20,13 +20,13 @@ messageDelayLevel=1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h 7s
 ## 打包
 
 ```
-git clone https://gitee.com/wlyxtx/rocketmq.git
-git checkout -b yho-release-4.7.1 origin/yho-release-4.7.1
+git clone https://gitee.com/deveho/rocketmq-message-delay-level.git
+git checkout -b rocketmq-messageDelayLevel origin/rocketmq-messageDelayLevel
 mvn -Prelease-all -DskipTests clean install -U
 cp -r distribution/target/rocketmq-4.7.1 /data/work/
 cd /data/work/rocketmq-4.7.1/bin
 
-git clone https://gitee.com/wlyxtx/rocketmq-console.git
+git clone https://gitee.com/deveho/rocketmq-console.git
 mvn clean package -Dmaven.test.skip=true
 cp target/rocketmq-console-ng-1.0.0.jar /data/work/rocketmq-4.7.1/lib
 ```
