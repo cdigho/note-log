@@ -880,3 +880,5 @@ WeakHashMap 内部是通过弱引用来管理entry的，弱引用的特性对应
 
 [**如何排查线上OOM**](source/java/jvm/排查OOM.md)
 
+[**如何排查线上CPU飙高和线程死锁**](source/java/jvm/CPU飙高和线程死锁.md)
+
