@@ -8,7 +8,7 @@
 
 
 
-![img](../../assets/image-2022071253425.png)
+![image-20221016173901140](assets/image-20221016173901140.png)
 
 ## 事务提交后执行
 
@@ -122,4 +122,20 @@ public class TransactionHolder<T> {
 }
 
 ```
+
+## 传播机制
+
+在声明式事务中通过配置@Transactional主键实现事务，内参数可以配置传播机制
+
+例如：    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+
+| 传播机制                  | 说明                                                         |
+| ------------------------- | ------------------------------------------------------------ |
+| Propagation.REQUIRED      | 支持当前事务，如果当前没有事务，则新建一个事务。             |
+| Propagation.SUPPORTS      | 支持当前事务，如果当前没有事务，就以非事务方式执行。         |
+| Propagation.MANDATORY     | 支持当前事务，如果当前没有事务，就抛出异常。                 |
+| Propagation.REQUIRES_NEW  | 新建事务，如果当前存在事务，把当前事务挂起。                 |
+| Propagation.NOT_SUPPORTED | 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。   |
+| Propagation.NEVER         | 以非事务方式执行，如果当前存在事务，则抛出异常。             |
+| Propagation.NESTED        | 支持当前事务，如果当前事务存在，则执行一个嵌套事务，如果当前没有事务，就新建一个事务。 |
 
