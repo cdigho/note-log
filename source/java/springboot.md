@@ -187,3 +187,78 @@ public class TransactionHolder<T> {
 }
 
 ```
+
+# 可执行文件
+
+- GraalVM
+- springboot3.0
+- [参考文档](https://blog.csdn.net/weixin_60223449/article/details/128120918)
+- 配置插件
+- [示例代码](https://gitee.com/deveho/springboot-graalvm.git)
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>build-native</id>
+                        <goals>
+                            <goal>compile-no-fork</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                    <execution>
+                        <id>test-native</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 此处是入口类,必须与实际代码一致,否则无法打包成功-->
+                    <mainClass>org.yho.graalvm.GraalVMApplication</mainClass>
+                    <!--  生成的可执行文件名-->
+                    <imageName>run</imageName>
+                    <buildArgs>
+                        <buildArg>--verbose</buildArg>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+ - 执行打包命令
+
+   - 可通过idea中maven插件执行
+
+   - 直接通过命令
+
+   - 运行可执行文件即可启动程序
+
+     ```java
+      mvn -Pnative -DskipTests clean package
+      ./target/run
+     ```
+
+     
+
+     ![image-20221211194248300](assets/image-20221211194248300.png)
+
