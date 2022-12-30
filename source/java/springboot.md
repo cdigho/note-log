@@ -262,3 +262,131 @@ public class TransactionHolder<T> {
 
      ![image-20221211194248300](assets/image-20221211194248300.png)
 
+# 循环依赖
+
+```java
+package org.yho.study.web.daily.circular.dependency;
+
+import org.yho.core.common.ReflectionUtils;
+
+/**
+ * 演示解答spring的循环依赖问题
+ * Spring 提供了除了构造函数注入和原型注入外的，setter循环依赖注入解决方案。
+ * spring通过三级缓存延迟生成初始化完成的Bean解决循环依赖
+ * 一级缓存：为“Spring 的单例属性”而生 ，就是个单例池，用来存放已经初始化完成的单例 Bean；
+ * 二级缓存：为“解决 AOP”而生 ，存放的是半成品的 AOP 的单例 Bean；
+ * 三级缓存：为“打破循环”而生 ，存放的是生成半成品单例 Bean 的工厂方法。
+ *
+ *
+ * 原型注入：每次获取都是一个新的bean
+ * @Component
+ * @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
+ */
+public class CircularDependencyFactory {
+    public static void main(String[] args) throws Exception {
+        CircularDependencyA a = new CircularDependencyA();
+        CircularDependencyB b = new CircularDependencyB();
+
+        //此方式类似于在在字段上注解@Resource
+        ReflectionUtils.setFieldValue(a, "circularDependencyB", b);
+        ReflectionUtils.setFieldValue(b, "circularDependencyA", a);
+
+        //此方式类似于在在set方法上注解@Resource
+        ReflectionUtils.invokeMethod(a, ReflectionUtils.getMethod(a, "setCircularDependencyB", b.getClass()), b);
+        ReflectionUtils.invokeMethod(b, ReflectionUtils.getMethod(b, "setCircularDependencyA", a.getClass()), a);
+
+        a.action();
+        b.action();
+
+        //通过以上可以发现，通过创建空对象(字段值为null)在给字段赋值的方式可以解决循环依赖问题
+        //如果通过构造方法的话，需要在创建对象的时候准备好字段的对象值，
+        //准备好的在于，构造对象要求传入对象的话，对于构造方法中对于对象的操作是未知的，所以必须准备好在传入
+        //而多个对象循环引用，还要求传入一个准备好的对象这种情况是无法解决的，故spring不解决构造方的循环引用问题
+
+        //而构造方法不要求传入准备好的对象，也可以先传入一个空对象，暂时创建对象，而后给其赋值
+        //先传入一个空对象类似于使用@Lazy注解，生成一个代理对象，调用的时候获取原生对象
+
+        //spring还可以手动处理，实现两个接口ApplicationContextAware, InitializingBean，获取上下文对象，并手动设置对象
+
+        CircularDependencyA a1 = new CircularDependencyA(new CircularDependencyB(null));
+        CircularDependencyB b1 = new CircularDependencyB(new CircularDependencyA(null));
+        ReflectionUtils.setFieldValue(a1, "circularDependencyB", b1);
+        ReflectionUtils.setFieldValue(b1, "circularDependencyA", a1);
+        a1.action();
+        b1.action();
+
+        CircularDependencyA a2 = ReflectionUtils.newInstance(ReflectionUtils.getConstructor(a1, CircularDependencyB.class), b1);
+        CircularDependencyB b2 = ReflectionUtils.newInstance(ReflectionUtils.getConstructor(b1, CircularDependencyA.class), a1);
+        a2.action();
+        b2.action();
+
+    }
+}
+```
+
+```java
+package org.yho.study.web.daily.circular.dependency;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+public class CircularDependencyA implements ApplicationContextAware, InitializingBean {
+    private CircularDependencyB circularDependencyB;
+
+    private ApplicationContext context;
+
+    public CircularDependencyA() {
+    }
+
+    public CircularDependencyA(CircularDependencyB circularDependencyB) {
+        this.circularDependencyB = circularDependencyB;
+    }
+
+    public void setCircularDependencyB(CircularDependencyB circularDependencyB) {
+        this.circularDependencyB = circularDependencyB;
+    }
+
+    public void action() {
+        System.err.println("执行A对象动作");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context = applicationContext;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        circularDependencyB = context.getBean(CircularDependencyB.class);
+    }
+
+}
+```
+
+```java
+package org.yho.study.web.daily.circular.dependency;
+
+public class CircularDependencyB {
+
+    private CircularDependencyA circularDependencyA;
+
+    public CircularDependencyB() {
+    }
+
+    public CircularDependencyB(CircularDependencyA circularDependencyA) {
+        this.circularDependencyA = circularDependencyA;
+    }
+
+    public void setCircularDependencyA(CircularDependencyA circularDependencyA) {
+        this.circularDependencyA = circularDependencyA;
+    }
+
+    public void action() {
+        System.err.println("执行B对象动作");
+        circularDependencyA.action();
+    }
+}
+```
+
