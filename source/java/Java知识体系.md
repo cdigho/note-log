@@ -883,3 +883,8 @@ WeakHashMap 内部是通过弱引用来管理entry的，弱引用的特性对应
 - [**GraalVM**](source/java/jvm/GraalVM.md)
 
 
+
+# 知识点
+
+- [**spring的hashcode为什么使用常量31计算?**](source/java/knowledge/spring的hashcode为什么使用常量31计算.md)
+
