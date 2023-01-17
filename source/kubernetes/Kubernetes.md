@@ -98,3 +98,10 @@ k8容器内连接MySQL
 
 ```
 
+
+
+# k8s unbutu内安装curl&telnet&ping
+
+```
+apt-get update && apt-get install curl openbsd-inetd telnet iputils-ping
+```
