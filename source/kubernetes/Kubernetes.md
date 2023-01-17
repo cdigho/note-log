@@ -18,8 +18,11 @@ winpty kubectl exec -ti <your-pod-name> -n <your-namespace>  -- bash
 kubectl exec -ti <your-pod-name> -n <your-namespace>  -- ls
 kubectl exec -ti <your-pod-name> -n <your-namespace>  -- bash -c 'ls'
 
-#删除pod
+#删除重启pod
 kubectl delete pod podname -n namespace
+#滚动更新重启
+kubectl rollout restart deployment $DEPLOYMENT -n $NAMESPACE
+
 #拷贝文件
     #pod到主机
     kubectl cp -n namespace -c container  podName:filePath localFilePath
@@ -59,9 +62,11 @@ kubectl get pod -n daily
 #实时查看pod的日志
 kubectl  logs -f $POD_NAME -n $NAMESPACE
 
+#获取类型为services的资源列表
+kubectl  get services -n $NAMESPACE|grep ''
 
 #获取类型为Deployment的资源列表
-kubectl get deployments
+kubectl get deployments $SERVICES -N $NAMESPACE
 
 #获取类型为Pod的资源列表
 kubectl get pods
