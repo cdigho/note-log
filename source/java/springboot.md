@@ -75,6 +75,18 @@
 
 ![image-20221016173901140](assets/image-20221016173901140.png)
 
+## 解决private失效
+
+以下来自 Spring 官方文档：
+
+> When using proxies, you should apply the @Transactional annotation only to methods with public visibility. If you do annotate protected, private or package-visible methods with the @Transactional annotation, no error is raised, but the annotated method does not exhibit the configured transactional settings. Consider the use of AspectJ (see below) if you need to annotate non-public methods.
+
+```
+大概意思就是 @Transactional 只能用于 public 的方法上，否则事务不会失效，如果要用在非 public 方法上，可以开启 AspectJ 代理模式。
+```
+
+
+
 ## 事务提交后执行
 
 ```java
