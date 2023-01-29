@@ -1,3 +1,30 @@
+# 锁表查询
+
+```
+-- 查看所有进程 
+show processlist;
+-- 查看所有进程的更多信息 
+show full processlist;
+-- 杀掉指定mysql连接的进程号
+kill 18;
+-- 查看正在进行中的事务
+SELECT * FROM information_schema.INNODB_TRX
+-- 查看正在锁的事务
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS; 
+-- 查看等待锁的事务
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS; 
+-- 查询是否锁表
+show OPEN TABLES where In_use > 0;
+-- 查看最近死锁的日志
+show engine innodb status
+-- 查看服务器状态
+show status like '%lock%';
+-- 查看超时时间：
+show variables like '%timeout%';
+```
+
+
+
 # like效率
 
 - 问题
@@ -298,5 +325,56 @@ LIMIT ${(param.current-1)*param.size},${param.size}
 AND date_format( po.pay_time, '%Y-%m-%d' )>= #{startTime}
 AND date_format( po.pay_time, '%Y-%m-%d' )<= #{endTime}
 ]]>
+```
+
+# update锁表与锁行
+
+当关闭自动提交，where条件没有索引，更新一条语句，开启另一个连接更新将会锁表。
+
+```
+更新的目的是先找后更新 
+更新就要保证原子性  那么保证原子性的方法就是锁
+如果没有索引  先找要更新的记录    就要全表扫描  肯定锁表
+如果有索引  可以直接找到记录锁行
+
+
+如果有索引  也是先锁表 只不过有索引 找到那条记录很快 找到那条记录就把整张表给解锁  锁那条记录就OK了   是不是这样(有可能是直接锁表快速找到索引行，有可能直接锁行)
+```
+
+
+
+```mysql
+CREATE TABLE `user`  (
+  `id` bigint NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `age` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `user` VALUES (1, '张三', 21);
+INSERT INTO `user` VALUES (2, '李四', 23);
+```
+
+
+
+```mysql
+# 连接1
+SET @@autocommit=0;
+SET @@autocommit=1;
+SELECT @@autocommit;
+
+UPDATE `user` SET `name`='张三' WHERE age=21;
+UPDATE `user` SET `name`='张三1' WHERE id=1;
+
+COMMIT;
+
+# 连接2
+SELECT @@autocommit;
+
+ALTER TABLE `dev`.`user` ADD INDEX `index_age`(`age`) USING BTREE;
+ALTER TABLE `dev`.`user` DROP INDEX `index_age`;
+
+UPDATE `user` SET `name`='李四' WHERE age=23;
+UPDATE `user` SET `name`='李四2' WHERE id=2;
 ```
 
