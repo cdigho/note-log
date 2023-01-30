@@ -10,11 +10,12 @@
              <img src="assets/envelope-solid.svg" width="18px">
              wlyxtx@163.com
          </span>
-         ·
+       <!--    ·
          <span>
              <img src="assets/github-brands.svg" width="18px">
              <a href="https://gitee.com/sitekeyho/">sitekeyho</a>
          </span>
+			-->
          ·
          <span>
              <img src="assets/rss-solid.svg" width="18px">
@@ -23,11 +24,11 @@
      </div>
  </center>
 
+
  # <img src="assets/info-circle-solid.svg" width="30px"> 个人信息 
 
  - 求职意向：Java 研发工程师
  - 工作经验：4 年
- - 期望薪资：面议
 
 # <img src="assets/graduation-cap-solid.svg" width="30px"> 教育经历
 
