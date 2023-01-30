@@ -43,13 +43,13 @@
 
 # <img src="assets/tools-solid.svg" width="30px"> 技能清单
 
-- 熟练掌握Java基础知识，理解IO、多线程、集合等基础框架
-- 熟练掌握面向对象OOP程序设计及其常用开发工具
+- 熟练掌握Java基础知识，IO、多线程、集合等基础框架
+- 熟练掌握idea、git、svn、maven等协作开发工具
 - 熟练掌握Spring、springboot基础服务脚手架框架
 - 熟练掌握dubbo、SpringCloud微服务框架
-- 熟练掌握 MySQL、Redis以及mybatis持久层框架
+- 熟练掌握MySQL、Redis以及mybatis持久层框架
 - 熟悉nacos、Apollo注册服务发现配置中心
-- 熟悉Linux操作系统以及docker jekins mavengit基础运维部署
+- 熟悉Linux操作系统以及docker、jekins、maven、git基础运维部署
 
 
 # <img src="assets/project-diagram-solid.svg" width="30px"> 项目经历
