@@ -60,3 +60,6 @@
 
   根目录编写 index.html
 
+# 作者
+
+- [简历](resume.md)
