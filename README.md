@@ -62,4 +62,4 @@
 
 # 作者
 
-- [简历](resume.md)
+- [简历](https://sitekeyho.gitee.io/markdown-resume/#/)
