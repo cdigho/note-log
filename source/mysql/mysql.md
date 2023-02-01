@@ -283,10 +283,12 @@ FROM DUAL;
 | 季   | quarter     | 128       |
 | 年   | year        | 256       |
 
-# 格式化时间戳
+# 时间戳
 
 ```mysql
-SELECT UNIX_TIMESTAMP(NOW())
+SELECT
+	unix_timestamp(now()),
+	FROM_UNIXTIME( unix_timestamp( now()), '%Y-%m-%d %h:%i:%s' )
 ```
 
 # 格式化时间
