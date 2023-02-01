@@ -378,3 +378,36 @@ UPDATE `user` SET `name`='李四' WHERE age=23;
 UPDATE `user` SET `name`='李四2' WHERE id=2;
 ```
 
+# 悲观锁
+
+高并发场景下对数据的准确行有很高的要求，可以使用for update
+
+for update 仅适用于InnoDB，并且必须开启事务，在begin与commit之间才生效。
+
+InnoDB默认是行级别的锁，当有明确指定的主键时候，是行级锁。否则是表级别。
+
+```MySQL
+-- 在Navicat开启两个窗口测试，后执行的将会等待第一个提交可执行
+
+SET @@autocommit=0;
+SELECT @@autocommit;
+
+SELECT * FROM commodity WHERE id=1 FOR UPDATE;
+UPDATE commodity SET `count`=`count`-1 WHERE id=1;
+
+COMMIT;
+```
+
+# 乐观锁
+
+[参考](https://blog.csdn.net/weixin_45433031/article/details/120838045)
+
+更新前查询version字段，更新时候通过比较version字段是否相等进行更新
+
+- version字段
+- CAS 比较并交换
+- 适用于读场景多竞争条件不激烈的场景，当写操作非常频繁时，更新失败的几率就越大，上层逻辑进行重试的次数也会增多，从而降低了系统的性能。
+
+```
+update task set value = newValue,version = version+1 where version = loadVersion;
+```
