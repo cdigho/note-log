@@ -63,7 +63,3 @@
 - 部署
 
   根目录编写 index.html
-
-# 作者
-
-- [简历](https://sitekeyho.gitee.io/markdown-resume/#/)
