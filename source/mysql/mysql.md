@@ -300,6 +300,22 @@ DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'),
 DATE_FORMAT(NOW(),'%y-%m-%d %H:%i:%s')
 ```
 
+# FIELD函数
+
+```mysql
+-- 需要在查询结果中根据某个字段的具体值来排序
+SELECT
+	order_no,
+	create_time 
+FROM
+	`order` 
+ORDER BY
+	FIELD( order_no, 'JP2023020725232', 'JP2023020781747', 'JP2023020797629' ) DESC 
+	LIMIT 100
+```
+
+
+
 # 分组结果分割拼装
 
 ```mysql
