@@ -2,7 +2,7 @@
 
 - [Java知识体系](source/java/Java知识体系.md)
 - [springboot](source/java/springboot.md)
-- [面试常见问题](source/java/面试常见问题.md)
+- [面试常见问题](source/java/常见问题.md)
 - [dubbo](source/java/dubbo.md)
 
 # Python
