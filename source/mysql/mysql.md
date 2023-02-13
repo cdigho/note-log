@@ -314,6 +314,64 @@ ORDER BY
 	LIMIT 100
 ```
 
+# 聚合函数
+
+聚合函数又叫组函数，通常是对表中的数据进行统计和计算，一般结合分组(group by)来使用，用于统计和计算分组数据。
+
+```
+常用的聚合函数:
+count(col): 表示求指定列的总行数
+max(col): 表示求指定列的最大值
+min(col): 表示求指定列的最小值
+sum(col): 表示求指定列的和
+avg(col): 表示求指定列的平均值
+```
+
+
+
+# 窗口函数
+
+[文章](http://events.jianshu.io/p/fd06605d6f48)
+
+ 窗口函数（window functions），也叫分析函数和OLAP函数，MySQL在8.0之后开始支持窗口函数。窗口函数可以用来对数据进行实时分析处理，和group by有类似之处，其区别在于窗口会对每个分组之后的数据按行进行分别操作，而group by一般对分组之后的函数使用聚合函数汇总，做不到对不同的group中的行数据进行分别操作。这就简单介绍几种常见的MySQL窗口函数。下表中列出了几种常见的窗口函数，并对其基本功能进行了描述。接下来我们会以一段示例，来展示MySQL中窗口函数的用途和效果。
+
+| 序号 | 函数         | 描述                                   |
+| ---- | ------------ | -------------------------------------- |
+| 1    | ROW_NUMBER() | 当前行在其分区中的行号                 |
+| 2    | RANK()       | 当前行在其分区内的序号，有间隙，不连续 |
+
+```mysql
+CREATE TABLE `players` (
+	`pid` INT ( 2 ) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR ( 50 ) NOT NULL,
+	`age` INT ( 2 ) NOT NULL,
+	PRIMARY KEY ( `pid` ),
+	UNIQUE KEY `name` ( `name` ) 
+) ENGINE = INNODB DEFAULT CHARSET = latin1;
+INSERT INTO `players` ( `pid`, `name`, `age` )
+VALUES
+	( 1, 'Samual', 25 ),
+	( 2, 'Vino', 20 ),
+	( 3, 'John', 20 ),
+	( 4, 'Andy', 22 ),
+	( 5, 'Brian', 21 ),
+	( 6, 'Dew', 24 ),
+	( 7, 'Kris', 25 ),
+	( 8, 'William', 26 ),
+	( 9, 'George', 23 ),
+	( 10, 'Peter', 19 ),
+	( 11, 'Tom', 20 ),
+	( 12, 'Andre', 20 );
+	
+```
+
+```mysql
+-- RANK 相同的并列排序，将一样的数值放在了一起，也就是并列排名
+SELECT NAME,age,RANK() OVER(ORDER BY age ASC) AS 'rank' FROM players; 
+-- ROW_NUMBER 直接排序，将那些数值相同也按照顺序排序
+SELECT NAME,age,ROW_NUMBER() OVER(ORDER BY age ASC) AS 'rank' FROM players; 
+```
+
 
 
 # 分组结果分割拼装
