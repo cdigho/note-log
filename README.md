@@ -16,6 +16,10 @@
 - [日常记录](source/dailylog/dailylog.md)
 - [help](source/dailylog/dailyloghelp.md)
 
+# redis
+
+- [ID生成器服务](source/redis/ID生成器服务.md)
+
 # mysql
 
 - [常用命令](source/mysql/mysql.md)
