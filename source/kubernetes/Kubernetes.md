@@ -84,6 +84,12 @@ kubectl get deployments -n daily
 # 查看有哪些名称空间 
 kubectl get ns
 
+#获取类型为service(svc)的资源列表
+kubectl get svc
+kubectl get svc -n $NAMESPACE
+kubectl get svc --all-namespaces
+kubectl get svc --all-namespaces -o wide 
+
 
 k8容器内连接MySQL
 	方式一 mycli Python工具
