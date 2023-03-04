@@ -31,3 +31,12 @@ docker run -p 3306:3306 --name mysql01   -v /Users/yho/working/install/docker/my
 
 ```
 
+# Mac系统查询docker的数据卷目录
+
+```
+在Mac系统上，Docker使用的是虚拟机技术，在虚拟机中运行Linux操作系统，所以在Mac系统中查询Docker的数据卷目录需要进入到虚拟机中进行查看。具体步骤如下：
+docker run -it --name debian -d --restart=always --privileged --pid=host debian nsenter -t 1 -m -u -n -i bash
+cd /var/lib/docker/volumes/
+
+```
+
