@@ -56,7 +56,7 @@
 
 # 工具
 
-- [mybatis日志格式化](https://sitekeyho.gitee.io/note-log/static/myBatisLog.html)
+- [mybatis日志格式化](https://cdigho.gitee.io/note-log/static/myBatisLog.html)
 
 # 静态网页
 
