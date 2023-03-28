@@ -2992,3 +2992,22 @@ ps -ef | grep java | grep -v grep | awk '{print $2}' | xargs kill -9
 
 ```
 
+# git 修改提交时间
+
+1.查询需要修改提交时间的记录(N=记录数)
+
+```
+git rebase -i HEAD~N
+```
+
+![1679983029689](D:\me\note-log\source\java\assets\1679983029689.png)
+
+2.在交互式界面中将需要修改的记录行(输入i插入模式)改为edit然后:wq保存
+
+3.使用命令更改提交时间
+
+```
+ git commit --amend --date="YYYY-MM-DD HH:MM:SS"
+ git commit --amend --date="2020-01-01 00:00:00"
+```
+
