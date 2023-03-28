@@ -3011,3 +3011,14 @@ git rebase -i HEAD~N
  git commit --amend --date="2020-01-01 00:00:00"
 ```
 
+# dubbo直连提供者
+
+```
+https://cn.dubbo.apache.org/zh-cn/docs/advanced/explicit-target/
+指定单个服务
+java -Dcom.alibaba.xxx.XxxService=dubbo://localhost:20890
+指定多个通过文件
+java -Ddubbo.resolve.file=xxx.properties
+2.0 以上版本自动加载 ${user.home}/dubbo-resolve.properties文件，不需要配置
+```
+
