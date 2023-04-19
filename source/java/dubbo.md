@@ -133,7 +133,97 @@ Caused by: java.lang.IllegalStateException: Serialized class org.apache.dubbo.co
         }
     ```
 
-
+# required a single bean, but 3 were found:
 
 ​    
+
+dubbo注入bean异常
+
+```
+[2023-04-19 16:27:36.036] [operatorName=,operatorId=,traceId=,thread=main,rows=40]  ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field fService in com.goldnurse.channel.manage.service.impl.EServiceImpl required a single bean, but 3 were found:
+	- FServiceImpl: defined in file [D:\work\code\goldnurse\goldnurse-modules\goldnurse-channel-manage\goldnurse-channel-manage-starter\target\classes\com\goldnurse\channel\manage\service\impl\FServiceImpl.class]
+	- @Reference(timeout=30000: a programmatically registered singleton	- version=3.3.3) com.goldnurse.channel.manage.service.FService: a programmatically registered singleton
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+```
+
+## 问题原因
+
+```
+条件
+1.三个bean发生循环依赖
+2.其中的一个bean的@DubboService的版本为X，但是在循环依赖的其中一个bean中使用@DubboReference引入改版本为Y，当X!=Y时候便会发生上述异常(required a single bean, but 3 were found:)
+因为当使用DubboReference的时候如果本地没有指定版本会进行创建但是这里还有循环依赖问题造成了该结果。
+```
+
+
+
+## 问题还原
+
+```
+public interface DService {
+    void run();
+}
+public interface EService {
+    void run();
+}
+public interface FService {
+    void run();
+}
+@DubboService(version = "1.1.1")
+public class DServiceImpl implements DService {
+
+    @Autowired
+    private EService eService;
+
+    @DubboReference(version = "3.3.3", timeout = 30000)
+    private FService fService;
+    
+    @Override
+    public void run() {
+
+    }
+
+}
+@DubboService(version = "1.1.1")
+public class EServiceImpl implements EService {
+
+
+    @Autowired
+    private DService dService;
+
+    @Autowired
+    private FService fService;
+    @Override
+    public void run() {
+
+    }
+
+}
+@DubboService(version = "1.1.1")
+public class FServiceImpl implements FService {
+
+
+    @Autowired
+    private EService eService;
+
+    @Override
+    public void run() {
+
+    }
+
+}
+
+```
 
