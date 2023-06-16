@@ -28,11 +28,14 @@ kubectl rollout restart deployment $DEPLOYMENT -n $NAMESPACE
     kubectl cp -n namespace -c container  podName:filePath localFilePath
     例
     kubectl cp -n goldnurse -c work-goldnurse-open-api  work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/info.log info.log
+    kubectl cp -n goldnurse work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/info.log info.log
 
     #主机到pod
     kubectl cp -n namespace -c container  localFilePath podName:filePath 
     例
     kubectl cp -n goldnurse -c work-goldnurse-open-api  a.txt work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/
+    kubectl cp -n goldnurse a.txt work-goldnurse-open-api-784c897d64-xmpjm:opt/www/logs/goldnurse-open-api-starter/
+
 podName冒号后省略"/" 否则报错
 tar: removing leading ‘/’ from member names
 
