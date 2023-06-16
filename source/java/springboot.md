@@ -402,3 +402,104 @@ public class CircularDependencyB {
 }
 ```
 
+# 项目启动前加载自定义配置
+
+通过改功能可以在项目启动前统一配置本地项目的自定义话配置而不用改动代码，例如本地测试时候需要自定义端口号dubbo的版本feign的调用地址等可以通过改功能实现，该功能的读取索引为项目的spring.application.name值，需要配置好spring.application.name.properties配置。
+
+- 创建`META-INF/spring.factories`文件：在自动配置模块的resources目录下创建`META-INF/spring.factories`文件，并添加以下内容： 
+
+  ```
+  org.springframework.boot.env.EnvironmentPostProcessor=com.team.config.ConfigurationReader
+  ```
+
+- 编写自动读取类
+
+  ```java
+  package com.team.config;
+  
+  import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+  import org.springframework.boot.SpringApplication;
+  import org.springframework.boot.env.EnvironmentPostProcessor;
+  import org.springframework.core.env.ConfigurableEnvironment;
+  import org.springframework.core.env.MapPropertySource;
+  import org.springframework.core.io.ClassPathResource;
+  import org.springframework.core.io.support.PropertiesLoaderUtils;
+  
+  import java.io.File;
+  import java.io.FileInputStream;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.util.HashMap;
+  import java.util.Map;
+  import java.util.Properties;
+  
+  /**
+   * @author yho
+   * @create 2023-06-16 16:17
+   * @Description
+   */
+  public class ConfigurationReader implements EnvironmentPostProcessor {
+      private static final String BASE_PATH = "D:\\me\\worklog\\美鑫\\configlist";
+  
+      @Override
+      public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+          // 读取配置信息，并将其添加到环境中,自定义方法，读取配置信息
+          environment.getPropertySources().
+                  addFirst(
+                          new MapPropertySource("yourConfig",
+                                  readYourConfig(environment, application)));
+      }
+  
+      private Map<String, Object> readYourConfig(ConfigurableEnvironment environment, SpringApplication application) {
+          try {
+              String springApplicationName = environment.getProperty("spring.application.name");
+              if (springApplicationName == null || springApplicationName == "") {
+                  YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
+                  factory.setResources(new ClassPathResource("application.yml"));
+                  factory.afterPropertiesSet();
+                  Properties properties = factory.getObject();
+                  springApplicationName = properties.getProperty("spring.application.name");
+                  if (springApplicationName == null || springApplicationName == "") {
+                      properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("application.properties"));
+                      springApplicationName = properties.getProperty("spring.application.name");
+                      if (springApplicationName == null || springApplicationName == "") {
+                          throw new RuntimeException("not bootstrap config spring.application.name");
+                      }
+                  }
+              }
+              // 读取配置信息的具体逻辑，可以从文件、数据库或其他地方获取配置信息
+              // 返回一个包含配置属性的Map
+              return getSpringApplicationName(springApplicationName);
+          } catch (IOException e) {
+              e.printStackTrace();
+              return new HashMap<>();
+          }
+      }
+  
+      private Map<String, Object> getSpringApplicationName(String springApplicationName) throws IOException {
+          InputStream is =
+                  is = new FileInputStream(BASE_PATH + File.separator + springApplicationName + ".properties");
+          
+          Properties properties = new Properties();
+          properties.load(is);
+          Map<String, Object> result = new HashMap<>();
+          for (String key : properties.stringPropertyNames()) {
+              result.put(key, properties.getProperty(key));
+          }
+          return result;
+  //        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>() {{
+  //            add(new HashMap<String, Object>() {{
+  //                put("spring.application.name", "application-name-starter");
+  //                put("server.port", 10001);
+  //            }});
+  //        }};
+  //        Optional<Map<String, Object>> first = list.stream().
+  //                filter((entity) -> entity.get("spring.application.name").equals(springApplicationName)).
+  //                collect(Collectors.toList()).stream().findFirst();
+  //        return first.get();
+      }
+  }
+  ```
+
+  
+
