@@ -412,6 +412,8 @@ public class CircularDependencyB {
   org.springframework.boot.env.EnvironmentPostProcessor=com.team.config.ConfigurationReader
   ```
 
+- 会在配置目录下读取bootstrap.properties的公共配置在读取spring.application.name的项目配置
+
 - 编写自动读取类
 
   ```java
@@ -439,7 +441,7 @@ public class CircularDependencyB {
    * @Description
    */
   public class ConfigurationReader implements EnvironmentPostProcessor {
-      private static final String BASE_PATH = "D:\\me\\worklog\\美鑫\\configlist";
+      private static final String BASE_PATH = "D:\\me\\worklog\\configlist";
   
       @Override
       public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -477,12 +479,19 @@ public class CircularDependencyB {
       }
   
       private Map<String, Object> getSpringApplicationName(String springApplicationName) throws IOException {
-          InputStream is =
-                  is = new FileInputStream(BASE_PATH + File.separator + springApplicationName + ".properties");
-          
+          InputStream is = new FileInputStream(BASE_PATH + File.separator + "public.properties");
           Properties properties = new Properties();
           properties.load(is);
           Map<String, Object> result = new HashMap<>();
+          for (String key : properties.stringPropertyNames()) {
+              result.put(key, properties.getProperty(key));
+          }
+          String port = properties.getProperty(springApplicationName);
+          result.put("server.port", port);
+  
+          is = new FileInputStream(BASE_PATH + File.separator + springApplicationName + ".properties");
+          properties = new Properties();
+          properties.load(is);
           for (String key : properties.stringPropertyNames()) {
               result.put(key, properties.getProperty(key));
           }
@@ -493,13 +502,13 @@ public class CircularDependencyB {
   //                put("server.port", 10001);
   //            }});
   //        }};
-  //        Optional<Map<String, Object>> first = list.stream().
+//        Optional<Map<String, Object>> first = list.stream().
   //                filter((entity) -> entity.get("spring.application.name").equals(springApplicationName)).
   //                collect(Collectors.toList()).stream().findFirst();
   //        return first.get();
       }
   }
   ```
-
+  
   
 
