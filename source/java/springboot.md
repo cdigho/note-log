@@ -406,6 +406,23 @@ public class CircularDependencyB {
 
 通过改功能可以在项目启动前统一配置本地项目的自定义话配置而不用改动代码，例如本地测试时候需要自定义端口号dubbo的版本feign的调用地址等可以通过改功能实现，该功能的读取索引为项目的spring.application.name值，需要配置好spring.application.name.properties配置。
 
+- 直接在springbootjar中添加
+
+  ```
+  例如2.3.1.RELEASE版本
+  org\springframework\boot\spring-boot\2.3.1.RELEASE\spring-boot-2.3.1.RELEASE.jar
+  在包中编辑`META-INF/spring.factories`
+  # Environment Post Processors
+  org.springframework.boot.env.EnvironmentPostProcessor=\
+  org.springframework.boot.cloud.CloudFoundryVcapEnvironmentPostProcessor,\
+  org.springframework.boot.env.SpringApplicationJsonEnvironmentPostProcessor,\
+  org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor,\
+  org.springframework.boot.env.ConfigurationReader,\
+  org.springframework.boot.reactor.DebugAgentEnvironmentPostProcessor
+  
+  并将ConfigurationReader编译好的class复制到jar中
+  ```
+
 - 创建`META-INF/spring.factories`文件：在自动配置模块的resources目录下创建`META-INF/spring.factories`文件，并添加以下内容： 
 
   ```
@@ -417,11 +434,10 @@ public class CircularDependencyB {
 - 编写自动读取类
 
   ```java
-  package com.team.config;
+  package org.springframework.boot.env;
   
   import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
   import org.springframework.boot.SpringApplication;
-  import org.springframework.boot.env.EnvironmentPostProcessor;
   import org.springframework.core.env.ConfigurableEnvironment;
   import org.springframework.core.env.MapPropertySource;
   import org.springframework.core.io.ClassPathResource;
@@ -441,7 +457,7 @@ public class CircularDependencyB {
    * @Description
    */
   public class ConfigurationReader implements EnvironmentPostProcessor {
-      private static final String BASE_PATH = "D:\\me\\worklog\\configlist";
+      private static final String BASE_PATH = System.getProperty("user.home") + File.separator + "configlist";
   
       @Override
       public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -473,13 +489,12 @@ public class CircularDependencyB {
               // 返回一个包含配置属性的Map
               return getSpringApplicationName(springApplicationName);
           } catch (IOException e) {
-              e.printStackTrace();
               return new HashMap<>();
           }
       }
   
       private Map<String, Object> getSpringApplicationName(String springApplicationName) throws IOException {
-          InputStream is = new FileInputStream(BASE_PATH + File.separator + "public.properties");
+          InputStream is = new FileInputStream(BASE_PATH + File.separator + "bootstrap.properties");
           Properties properties = new Properties();
           properties.load(is);
           Map<String, Object> result = new HashMap<>();
@@ -502,10 +517,14 @@ public class CircularDependencyB {
   //                put("server.port", 10001);
   //            }});
   //        }};
-//        Optional<Map<String, Object>> first = list.stream().
+  //        Optional<Map<String, Object>> first = list.stream().
   //                filter((entity) -> entity.get("spring.application.name").equals(springApplicationName)).
-  //                collect(Collectors.toList()).stream().findFirst();
+//                collect(Collectors.toList()).stream().findFirst();
   //        return first.get();
+      }
+  
+      public static void main(String[] args) {
+          System.out.println();
       }
   }
   ```
