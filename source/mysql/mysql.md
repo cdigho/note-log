@@ -487,3 +487,40 @@ COMMIT;
 ```
 update task set value = newValue,version = version+1 where version = loadVersion;
 ```
+
+# 统计数据了
+
+```sql
+-- 统计前N的数据行的表
+SELECT
+	TABLE_SCHEMA AS '数据库',
+	table_name AS '数据表',
+	concat( round( table_rows / 10000, 2 ), '万' ) AS '数据行',
+	concat( round( data_length / 1024 / 1024 / 1024, 2 ), 'GB' ) AS '数据容量',
+	concat( round( index_length / 1024 / 1024 / 1024, 2 ), 'GB' ) AS '索引容量' 
+FROM
+	information_schema.TABLES 
+WHERE
+	TABLE_SCHEMA IN ( 'trade_prod', 'goldnurse_platform', 'goldnurse_usercenter', 'goldnurse_activity', 'goldnurse_channel', 'goldnurse_tools' ) 
+GROUP BY
+	TABLE_SCHEMA,
+	table_name 
+ORDER BY
+	table_rows DESC 
+	LIMIT 50;
+-- 统计数据库的量
+SELECT
+	TABLE_SCHEMA AS '数据库',
+	concat( round( SUM( table_rows ) / 10000, 2 ), '万' ) AS '记录数',
+	concat( round( SUM( data_length ) / 1024 / 1024 / 1024, 2 ), 'GB' ) AS '数据容量',
+	concat( round( SUM( index_length ) / 1024 / 1024 / 1024, 2 ), 'GB' ) AS '索引容量' 
+FROM
+	information_schema.TABLES 
+WHERE
+	TABLE_SCHEMA IN ( 'trade_prod', 'goldnurse_platform', 'goldnurse_usercenter', 'goldnurse_activity', 'goldnurse_channel', 'goldnurse_tools' ) 
+GROUP BY
+	TABLE_SCHEMA 
+ORDER BY
+	table_rows DESC;
+```
+
