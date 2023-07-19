@@ -113,4 +113,6 @@ k8容器内连接MySQL
 
 ```
 apt-get update && apt-get install curl openbsd-inetd telnet iputils-ping
+安装rzsz
+apt-get install lrzsz
 ```
