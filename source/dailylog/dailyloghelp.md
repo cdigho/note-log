@@ -2621,6 +2621,33 @@ mesg：允许vi显示其他用户用write写到自己终端上的信息
 “?p：取出寄存器？中的内容并将其放到光标位置处。这里？可以是一个字母，也可以是一个数字 
 ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
 
+## curl调试http请求
+
+### 测试网络连通性
+
+```
+curl -vvv -i https://www.baidu.com
+-vvv: 表示开启详细输出模式(verbose)。这个参数会让curl在命令行输出详细的调试信息,包括请求头部、响应头部、连接过程等更多信息。
+-i: 表示输出响应头信息(include)。加上这个参数,curl会在返回的响应内容之前,先输出整个HTTP响应的头部信息。
+将会输出下面信息没有提供全部
+*   Trying 180.101.50.242:443...
+* TCP_NODELAY set
+* Connected to www.baidu.com (180.101.50.242) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Se
+拿出180.101.50.242:443使用telnet测试
+telnet 180.101.50.242 443
+```
+
+
+
+
+
 # nodejs
 
 ### 切换淘宝源
