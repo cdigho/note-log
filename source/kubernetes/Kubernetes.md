@@ -1,3 +1,27 @@
+# 配置kubectl
+
+[参考文档](https://www.cnblogs.com/shadow-yin/p/14843099.html)
+
+[版本发布页面](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md)
+
+1.搜索cce
+
+
+![1662457624978](D:/me/worklog/美鑫/.assets/1662457624978.png)
+
+2.下载kubectl配置文件
+
+![1662457696910](D:/me/worklog/美鑫/.assets/1662457696910.png)
+
+3.可选配置
+
+```
+#指定配置文件的别名-乐荐kubectl 
+vim ~/.bash_profile
+alias ljkubectl="kubectl --kubeconfig=/Users/username/.kube/kubeconfig-lejian-huawei.json "
+source ~/.bash_profile
+```
+
 # 常用命令
 
 ```
