@@ -136,7 +136,8 @@ k8容器内连接MySQL
 # k8s unbutu内安装curl&telnet&ping
 
 ```
-apt-get update && apt-get install curl openbsd-inetd telnet iputils-ping
+apt-get update && apt-get -y install curl openbsd-inetd telnet iputils-ping net-tools
 安装rzsz
-apt-get install lrzsz
+apt-get -y install lrzsz
 ```
+
