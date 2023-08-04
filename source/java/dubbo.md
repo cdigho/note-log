@@ -227,3 +227,13 @@ public class FServiceImpl implements FService {
 
 ```
 
+# telnet invoke
+
+```
+找到客户端端口
+telnet 127.0.0.1 20880
+ps -l 列出服务
+invoke com.team.DubboService.exec(param1,param2,param3)
+param为JSON或单个字段
+```
+
