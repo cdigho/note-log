@@ -488,7 +488,7 @@ COMMIT;
 update task set value = newValue,version = version+1 where version = loadVersion;
 ```
 
-# 统计数据了
+# 统计数据
 
 ```sql
 -- 统计前N的数据行的表
