@@ -237,3 +237,13 @@ invoke com.team.DubboService.exec(param1,param2,param3)
 param为JSON或单个字段
 ```
 
+# 直连提供者
+
+[文档](https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/explicit-target/#%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6%E6%98%A0%E5%B0%84)
+
+```
+java -Dcom.alibaba.xxx.XxxService=dubbo://localhost:20890
+java -Ddubbo.resolve.file=xxx.properties
+1.0.15 及以上版本支持，2.0 以上版本自动加载 ${user.home}/dubbo-resolve.properties文件，不需要配置
+```
+
