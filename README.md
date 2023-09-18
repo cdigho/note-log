@@ -59,6 +59,10 @@
 
 - [mybatis日志格式化](https://cdigho.gitee.io/note-log/static/myBatisLog.html)
 
+# issues
+
+- [持续集成、持续部署、持续交付](source/issues/2023/09/18/持续集成、持续部署、持续交付.md)
+
 # 静态网页
 
 - 方案
@@ -68,3 +72,4 @@
 - 部署
 
   根目录编写 index.html
+
