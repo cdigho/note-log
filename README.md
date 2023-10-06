@@ -64,6 +64,8 @@
 
 - [持续集成、持续部署、持续交付](source/issues/2023/09/18/持续集成、持续部署、持续交付.md)
 - [javaagent使用指南](https://www.cnblogs.com/rickiyang/p/11368932.html)
+- [内存溢出](source/java/jvm/排查OOM.md)
+- [CPU飙高和线程死锁](source/java/jvm/CPU飙高和线程死锁.md)
 - [配置微信支付宝商户](source/issues/2023/09/22/商户配置.md)
 - [干掉controller](https://github.com/cdigho/start-boot/tree/master/other/start-boot-unified-request)
 - [websocket集群解决方案](https://github.com/cdigho/spring-cloud-gateway-websocket)
