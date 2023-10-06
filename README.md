@@ -66,6 +66,10 @@
 - [javaagent使用指南](https://www.cnblogs.com/rickiyang/p/11368932.html)
 - [配置微信支付宝商户](source/issues/2023/09/22/商户配置.md)
 - [干掉controller](https://github.com/cdigho/start-boot/tree/master/other/start-boot-unified-request)
+- [websocket集群解决方案](https://github.com/cdigho/spring-cloud-gateway-websocket)
+- [RequestEntity不支持form-data](https://github.com/cdigho/start-boot-request-entity-formdata)
+- [rocketmq自定义消息延迟级别](https://github.com/cdigho/rocketmq-message-delay-level/commit/d6ba63d6b75ea3da1157bbf67a1665a6169bbc4a)
+- [golang实现一个精简的ssh客户端](https://github.com/cdigho/golang/tree/master/sshClient)
 
 # 静态网页
 
