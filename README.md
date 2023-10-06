@@ -72,6 +72,7 @@
 - [RequestEntity不支持form-data](https://github.com/cdigho/start-boot-request-entity-formdata)
 - [rocketmq自定义消息延迟级别](https://github.com/cdigho/rocketmq-message-delay-level/commit/d6ba63d6b75ea3da1157bbf67a1665a6169bbc4a)
 - [golang实现一个精简的ssh客户端](https://github.com/cdigho/golang/tree/master/sshClient)
+- [springboot对返回的字段进行翻译](https://github.com/cdigho/start-boot/commit/c3b1ec67b3625260ff6d321989369ef3ff71b9ab#diff-028d8313245f5d24e5f221256341169ccd5b2add829a6d2c3edfa8a3bb391b3e)
 
 # 静态网页
 
