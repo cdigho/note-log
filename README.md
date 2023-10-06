@@ -58,7 +58,7 @@
 
 # 工具
 
-- [mybatis日志格式化](static/myBatisLog.html)
+- [mybatis日志格式化](https://note.siyho.cc/static/myBatisLog.html)
 
 # issues
 
