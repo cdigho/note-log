@@ -75,6 +75,7 @@
 - [springboot对返回的字段进行翻译](https://github.com/cdigho/start-boot/commit/c3b1ec67b3625260ff6d321989369ef3ff71b9ab#diff-028d8313245f5d24e5f221256341169ccd5b2add829a6d2c3edfa8a3bb391b3e)
 - [微服务业务领域技术驱动设计(DDD)](https://github.com/cdigho/ddd-demo)
 - [jdk提示证书错误](source/issues/2023/10/09/jdk提示证书错误.md)
+- [git commit 规范](source/issues/2023/10/24/git-commit-log-template.md)
 
 # 静态网页
 
