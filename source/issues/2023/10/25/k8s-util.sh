@@ -14,7 +14,6 @@ read -p "选择使用的配置文件
 1：使用daily.json
 2：使用huaweicloud.json
 " selected_kubeconfig
-selected_kubeconfig=0
 if [ $selected_kubeconfig -eq 1 ]; then
 	kubeconfig=/root/.kube/kubeconfig-lejian-daily.json 
 elif [ $selected_kubeconfig -eq 2 ]; then
@@ -30,7 +29,6 @@ read -p "选择使用的命名空间
 2：使用goldnurse-uat
 3：使用goldnurse
 " selected_namespace
-selected_namespace=0
 if [ $selected_namespace -eq 1 ]; then
 	namespace=daily 
 elif [ $selected_namespace -eq 2 ]; then
@@ -66,9 +64,11 @@ read -p "1：实时输出pod日志
 
 if [ $selected_shell -eq 1 ]; then
 	# 输出pod的日志
+	echo "$kubeconfig  $namespace $selected_pod"
 	kubectl --kubeconfig=$kubeconfig  logs -f --tail=30 -n $namespace "$selected_pod"
 elif [ $selected_shell -eq 2 ]; then
 	# 进入该pod
+	echo "$kubeconfig  $namespace $selected_pod"
 	kubectl --kubeconfig=$kubeconfig  exec -ti -n $namespace "$selected_pod"  -- bash
 else
 	echo '选择错误'
