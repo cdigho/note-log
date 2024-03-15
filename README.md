@@ -77,6 +77,7 @@
 - [jdk提示证书错误](source/issues/2023/10/09/jdk提示证书错误.md)
 - [git commit 规范](source/issues/2023/10/24/git-commit-log-template.md)
 - [k8s日志与进入容器命令工具](source/issues/2023/10/25/k8s-util.md)
+- [并行构建对象](source/issues/2024/03/06/并行构建对象.md)
 
 # 静态网页
 
