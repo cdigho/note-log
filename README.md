@@ -79,6 +79,7 @@
 - [k8s日志与进入容器命令工具](source/issues/2023/10/25/k8s-util.md)
 - [并行构建对象](source/issues/2024/03/06/并行构建对象.md)
 - [mybatis-plus常用方法](source/issues/2024/03/23/mybatis-plus-hot-method.md)
+- [模拟以及解决MySQL死锁](source/issues/2024/03/24/模拟以及解决MySQL死锁.md)
 
 # 静态网页
 
