@@ -80,7 +80,7 @@
 - [并行构建对象](source/issues/2024/03/06/并行构建对象.md)
 - [mybatis-plus常用方法](source/issues/2024/03/23/mybatis-plus-hot-method.md)
 - [模拟以及解决MySQL死锁](source/issues/2024/03/24/模拟以及解决MySQL死锁.md)
-- [centos开机启动脚本](source/issues/2024/04/24/centos开机启动脚本md)
+- [centos开机启动脚本](source/issues/2024/04/24/centos开机启动脚本)
 - [配置openvpn](source/openvpn/OpenVPN.md)
 
 # 静态网页
