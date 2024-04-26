@@ -36,3 +36,13 @@
 | addFilter    | 自由拼接 SQL                      |
 | last         | 拼接在最后，例如：last(“LIMIT 1”) |
 
+# mybatis-plus escape character
+
+
+| escape | character    | description |
+| ------------ | --------------------------------- | --------------------------------- |
+|  &lt; | <          | 小于号      |
+| &gt;        | >   | 大于号 |
+| &amp;          | &     | 并且   |
+| &apos;       | '    | 单引号 |
+| &quot;           | "      | 双引号   |
