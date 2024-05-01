@@ -82,6 +82,7 @@
 - [模拟以及解决MySQL死锁](source/issues/2024/03/24/模拟以及解决MySQL死锁.md)
 - [centos开机启动脚本](source/issues/2024/04/24/centos开机启动脚本)
 - [配置openvpn](source/openvpn/OpenVPN.md)
+- [golang实现sshClient](https://github.com/cdigho/golang/blob/master/sshClient/README.md)
 
 # 静态网页
 
