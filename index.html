@@ -13,59 +13,41 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
-      //...
-    }
-  </script>
-  <!-- <script src="//cdn.jsdelivr.net/npm/docsify@4"></script> -->
-  <script src="lib/docsify@4.js"></script>
-
-  <!-- 额外配置 -->
-  <!-- 字数统计插件配置 -->
-  <script>
-    window.$docsify = {
+      // 指定开始页
+      homepage: 'README.md',
+      // 字数插件
       count: {
         countable: true,
         fontsize: '0.9em',
         color: 'rgb(90,90,90)',
         language: 'chinese'
-      }
-    }
-  </script>
-  <!-- 字数统计插件配置 -->
-
-  <!-- 搜索插件配置 -->
-  <script>
-    window.$docsify = {
-      search: 'auto', // 默认值
-      // 完整配置参数
+      },
+      // 搜索配置
       search: {
         maxAge: 86400000,//过期时间,单位毫秒,默认一天
         paths: [], // or 'auto'
         placeholder: '请输入搜索关键字',
         noData: '没有搜到呦!',
         depth: 2
-      }
+      },
     }
   </script>
-  <!-- 搜索插件配置 -->
 
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script> -->
+  <script src="lib/docsify.min.js"></script>
 
   <!-- 搜索插件 -->
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script> -->
   <script src="lib/search.min.js"></script>
-  <!-- 搜索插件 -->
 
   <!-- 字数统计插件 -->
   <!-- <script src="//unpkg.com/docsify-count/dist/countable.js"></script> -->
   <script src="lib/countable.js"></script>
-  <!-- 字数统计插件 -->
 
   <!-- 复制到剪贴板插件 -->
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script> -->
   <script src="lib/docsify-copy-code.min.js"></script>
-  <!-- 复制到剪贴板插件 -->
-  <!-- 额外配置 -->
-
 
 </body>
 
