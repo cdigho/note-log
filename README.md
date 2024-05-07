@@ -1,6 +1,5 @@
 #  Java
 
-- [Java知识体系](source/java/Java知识体系.md)
 - [springboot](source/java/springboot.md)
 - [常见问题](source/java/常见问题.md)
 - [dubbo](source/java/dubbo.md)
@@ -62,6 +61,7 @@
 
 # issues
 
+- [spring的hashcode为什么使用常量31计算](source/issues/2023/01/06/spring的hashcode为什么使用常量31计算.md)
 - [持续集成、持续部署、持续交付](source/issues/2023/09/18/持续集成、持续部署、持续交付.md)
 - [javaagent使用指南](https://www.cnblogs.com/rickiyang/p/11368932.html)
 - [内存溢出](source/java/jvm/排查OOM.md)
