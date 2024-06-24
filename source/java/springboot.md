@@ -519,7 +519,7 @@ public class CircularDependencyB {
   //        }};
   //        Optional<Map<String, Object>> first = list.stream().
   //                filter((entity) -> entity.get("spring.application.name").equals(springApplicationName)).
-//                collect(Collectors.toList()).stream().findFirst();
+  //                collect(Collectors.toList()).stream().findFirst();
   //        return first.get();
       }
   
@@ -530,4 +530,41 @@ public class CircularDependencyB {
   ```
   
   
+
+## nacos等配置中心的方案
+
+实现PropertySourceLocator接口
+
+```
+#需要再META-INF/spring.factories中做配置类
+#org.springframework.cloud.bootstrap.BootstrapConfiguration=com.LocalPropertySourceLocator
+```
+
+
+
+```java
+package com.alibaba.cloud.nacos.client;
+
+/**
+ * @author xiaojing
+ * @author pbting
+ */
+@Order(0)
+public class NacosPropertySourceLocator implements PropertySourceLocator {}
+```
+
+```java
+package com.tencent.cloud.polaris.config.adapter;
+
+
+/**
+ * Spring cloud reserved core configuration loading SPI.
+ * <p>
+ * This SPI is implemented to interface with Polaris configuration center
+ *
+ * @author lepdou 2022-03-10
+ */
+@Order(0)
+public class PolarisConfigFileLocator implements PropertySourceLocator {}
+```
 
