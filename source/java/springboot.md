@@ -200,6 +200,46 @@ public class TransactionHolder<T> {
 
 ```
 
+# 事务提交后执行
+
+- 方法需要使用事务管理
+- 主流程执行完毕推送事务执行完毕事件
+- 监听事务执行完毕事件的方法，编写分支流程
+
+```java
+    @Resource
+    private ApplicationContext applicationContext;
+
+		@Override
+    @Transactional(rollbackFor = Exception.class)
+    public void  mainFlow(){
+        //执行业务流程
+
+        //推送事件
+        applicationContext.publishEvent(new MeetingEvent<>(id));
+    }
+    @TransactionalEventListener(classes = MeetingEvent.class, phase = TransactionPhase.AFTER_COMMIT)
+    public void meetingEvent(MeetingEvent<Long> meetingEvent) {
+        final Long key = meetingEvent.getKey();
+        final TbGenlMeetingEntity tbGenlMeetingEntity = tbGenlMeetingDomainService.queryTbGenlMeetingById(key);
+        log.info("主流程执行完成后执行分支流程ID:{}", tbGenlMeetingEntity.getMeetingAtta());
+    }
+
+    public static class MeetingEvent<Key> {
+        private Key key;
+
+        public MeetingEvent(Key key) {
+            this.key = key;
+        }
+
+        public Key getKey() {
+            return key;
+        }
+    }
+```
+
+
+
 # 可执行文件
 
 - GraalVM
