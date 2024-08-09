@@ -608,3 +608,68 @@ package com.tencent.cloud.polaris.config.adapter;
 public class PolarisConfigFileLocator implements PropertySourceLocator {}
 ```
 
+### 本地替换远程配置中心
+
+```java
+package org.springframework.cloud.bootstrap.config;
+
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(PropertySourceBootstrapProperties.class)
+public class PropertySourceBootstrapConfiguration
+		implements ApplicationContextInitializer<ConfigurableApplicationContext>, Ordered {
+
+	@Override
+	public void initialize(ConfigurableApplicationContext applicationContext) {
+		List<PropertySource<?>> composite = new ArrayList<>();
+		AnnotationAwareOrderComparator.sort(this.propertySourceLocators);
+		boolean empty = true;
+		ConfigurableEnvironment environment = applicationContext.getEnvironment();
+		for (PropertySourceLocator locator : this.propertySourceLocators) {
+			Collection<PropertySource<?>> source = locator.locateCollection(environment);
+			if (source == null || source.size() == 0) {
+				continue;
+			}
+			List<PropertySource<?>> sourceList = new ArrayList<>();
+			for (PropertySource<?> p : source) {
+				if (p instanceof EnumerablePropertySource) {
+					EnumerablePropertySource<?> enumerable = (EnumerablePropertySource<?>) p;
+					sourceList.add(new BootstrapPropertySource<>(enumerable));
+				}
+				else {
+					sourceList.add(new SimpleBootstrapPropertySource(p));
+				}
+			}
+			logger.info("Located property source: " + sourceList);
+			composite.addAll(sourceList);
+			empty = false;
+		}
+		//本地替换远程
+		for (PropertySource<?> propertySource : composite) {
+			if (propertySource.getSource() instanceof  Map){
+				Map map = (Map) propertySource.getSource();
+				map.forEach((k,v)->{
+					if (environment.containsProperty(k.toString())){
+						map.put(k.toString(),environment.getProperty(k.toString()));
+					}
+				});
+			}
+		}
+		if (!empty) {
+			MutablePropertySources propertySources = environment.getPropertySources();
+			String logConfig = environment.resolvePlaceholders("${logging.config:}");
+			LogFile logFile = LogFile.get(environment);
+			for (PropertySource<?> p : environment.getPropertySources()) {
+				if (p.getName().startsWith(BOOTSTRAP_PROPERTY_SOURCE_NAME)) {
+					propertySources.remove(p.getName());
+				}
+			}
+			insertPropertySources(propertySources, composite);
+			reinitializeLoggingSystem(environment, logConfig, logFile);
+			setLogLevels(applicationContext, environment);
+			handleIncludedProfiles(environment);
+		}
+	}
+	
+}
+```
+
