@@ -1,51 +1,51 @@
 #  Java
 
-- [springboot](source/java/springboot.md)
-- [常见问题](source/java/常见问题.md)
-- [dubbo](source/java/dubbo.md)
-- [netty教程](source/java/netty教程.md)
+- [springboot](note-log/source/java/springboot.md)
+- [常见问题](note-log/source/java/常见问题.md)
+- [dubbo](note-log/source/java/dubbo.md)
+- [netty教程](note-log/source/java/netty教程.md)
 
 # Python
 
 # Golang
 
-- [Golang基础](source/golang/golang基础.md)
+- [Golang基础](note-log/source/golang/golang基础.md)
 
 # dailylog
 
-- [日常记录](source/dailylog/dailylog.md)
-- [help](source/dailylog/dailyloghelp.md)
+- [日常记录](note-log/source/dailylog/dailylog.md)
+- [help](note-log/source/dailylog/dailyloghelp.md)
 
 # redis
 
-- [ID生成器服务](source/redis/ID生成器服务.md)
+- [ID生成器服务](note-log/source/redis/ID生成器服务.md)
 
 # mysql
 
-- [常用命令](source/mysql/mysql.md)
+- [常用命令](note-log/source/mysql/mysql.md)
 
 # docker
 
-- [常用安装命令](source/docker/base-install.md)
+- [常用安装命令](note-log/source/docker/base-install.md)
 
 # Kubernetes
 
-- [常用命令](source/kubernetes/Kubernetes.md)
+- [常用命令](note-log/source/kubernetes/Kubernetes.md)
 
 # Linux
 
-- [常用命令](source/linux/linux.md)
+- [常用命令](note-log/source/linux/linux.md)
 
 # 环境搭建
 
-- [rocketmq](source/create-env/rocketmq.md)
-- [seata](source/create-env/seata.md)
+- [rocketmq](note-log/source/create-env/rocketmq.md)
+- [seata](note-log/source/create-env/seata.md)
 
-- [canal](source/create-env/canal.md)
+- [canal](note-log/source/create-env/canal.md)
 
 # MacOS
 
-- [machelp](source/macos/machelp.md)
+- [machelp](note-log/source/macos/machelp.md)
 
 
 # 技术方案
@@ -61,30 +61,30 @@
 
 # issues
 
-- [spring的hashcode为什么使用常量31计算](source/issues/2023/01/06/spring的hashcode为什么使用常量31计算.md)
-- [持续集成、持续部署、持续交付](source/issues/2023/09/18/持续集成、持续部署、持续交付.md)
+- [spring的hashcode为什么使用常量31计算](note-log/source/issues/2023/01/06/spring的hashcode为什么使用常量31计算.md)
+- [持续集成、持续部署、持续交付](note-log/source/issues/2023/09/18/持续集成、持续部署、持续交付.md)
 - [javaagent使用指南](https://www.cnblogs.com/rickiyang/p/11368932.html)
-- [内存溢出](source/java/jvm/排查OOM.md)
-- [CPU飙高和线程死锁](source/java/jvm/CPU飙高和线程死锁.md)
-- [配置微信支付宝商户](source/issues/2023/09/22/商户配置.md)
+- [内存溢出](note-log/source/java/jvm/排查OOM.md)
+- [CPU飙高和线程死锁](note-log/source/java/jvm/CPU飙高和线程死锁.md)
+- [配置微信支付宝商户](note-log/source/issues/2023/09/22/商户配置.md)
 - [干掉controller](https://github.com/cdigho/start-boot/tree/master/other/start-boot-unified-request)
 - [websocket集群解决方案](https://github.com/cdigho/spring-cloud-gateway-websocket)
 - [RequestEntity不支持form-data](https://github.com/cdigho/start-boot-request-entity-formdata)
 - [rocketmq自定义消息延迟级别](https://github.com/cdigho/rocketmq-message-delay-level/commit/d6ba63d6b75ea3da1157bbf67a1665a6169bbc4a)
 - [golang实现一个精简的ssh客户端](https://github.com/cdigho/golang/tree/master/sshClient)
-- [springboot对返回的字段进行翻译](source/issues/2023/09/10/springboot对返回的字段进行翻译.md)
+- [springboot对返回的字段进行翻译](note-log/source/issues/2023/09/10/springboot对返回的字段进行翻译.md)
 - [微服务业务领域技术驱动设计(DDD)](https://github.com/cdigho/ddd-demo)
-- [jdk提示证书错误](source/issues/2023/10/09/jdk提示证书错误.md)
-- [git commit 规范](source/issues/2023/10/24/git-commit-log-template.md)
-- [k8s日志与进入容器命令工具](source/issues/2023/10/25/k8s-util.md)
-- [并行构建对象](source/issues/2024/03/06/并行构建对象.md)
-- [mybatis-plus常用方法](source/issues/2024/03/23/mybatis-plus-hot-method.md)
-- [模拟以及解决MySQL死锁](source/issues/2024/03/24/模拟以及解决MySQL死锁.md)
-- [centos开机启动脚本](source/issues/2024/04/24/centos开机启动脚本)
-- [配置openvpn](source/openvpn/OpenVPN.md)
+- [jdk提示证书错误](note-log/source/issues/2023/10/09/jdk提示证书错误.md)
+- [git commit 规范](note-log/source/issues/2023/10/24/git-commit-log-template.md)
+- [k8s日志与进入容器命令工具](note-log/source/issues/2023/10/25/k8s-util.md)
+- [并行构建对象](note-log/source/issues/2024/03/06/并行构建对象.md)
+- [mybatis-plus常用方法](note-log/source/issues/2024/03/23/mybatis-plus-hot-method.md)
+- [模拟以及解决MySQL死锁](note-log/source/issues/2024/03/24/模拟以及解决MySQL死锁.md)
+- [centos开机启动脚本](note-log/source/issues/2024/04/24/centos开机启动脚本)
+- [配置openvpn](note-log/source/openvpn/OpenVPN.md)
 - [golang实现sshClient](https://github.com/cdigho/golang/blob/master/sshClient/README.md)
-- [springmvc自定义配置读取](source/issues/2024/05/10/springmvc自定义配置读取.md)
-- [多语言方案](source/issues/2024/07/18/多语言方案.md)
+- [springmvc自定义配置读取](note-log/source/issues/2024/05/10/springmvc自定义配置读取.md)
+- [多语言方案](note-log/source/issues/2024/07/18/多语言方案.md)
 # 静态网页
 
 - 方案
