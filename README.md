@@ -85,6 +85,7 @@
 - [golang实现sshClient](https://github.com/cdigho/golang/blob/master/sshClient/README.md)
 - [springmvc自定义配置读取](/source/issues/2024/05/10/springmvc自定义配置读取.md)
 - [多语言方案](/source/issues/2024/07/18/多语言方案.md)
+- [免费学习平台](/source/issues/2024/10/12/免费学习平台.md)
 # 静态网页
 
 - 方案
