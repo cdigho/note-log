@@ -138,3 +138,9 @@ sudo rm -rf /Library/Developer/CommandLineTools
 sudo xcode-select --install
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer/
 xcodebuild -version
+
+
+
+清理右键重复多余菜单
+
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
